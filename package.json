@@ -4,7 +4,7 @@
 		"access": "public",
 		"registry": "https://registry.npmjs.org/"
 	},
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"type": "module",
 	"license": "MIT",
 	"description": "3D page flip effect for Vue.js",
@@ -32,13 +32,12 @@
 		"turn",
 		"3d"
 	],
-	"module": "dist/flipbook-vue.js",
 	"main": "dist/flipbook-vue.js",
 	"types": "dist/index.d.ts",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
-			"import": "./dist/flipbook.mjs"
+			"import": "./dist/flipbook-vue.js"
 		},
 		"./style": "./dist/flipbook-vue.css"
 	},

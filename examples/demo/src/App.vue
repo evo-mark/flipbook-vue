@@ -54,7 +54,7 @@
 import SvgIcon from "vue3-icon";
 import { ref, onMounted } from "vue";
 import { mdiChevronLeftCircle, mdiChevronRightCircle, mdiPlusCircle, mdiMinusCircle } from "@mdi/js";
-import Flipbook from "flipbook-vue";
+import Flipbook from "@evomark/flipbook-vue";
 import Ribbon from "./Ribbon.vue";
 
 const pages = ref([]);
@@ -123,6 +123,7 @@ onMounted(() => {
 </script>
 
 <style>
+@import "@evomark/flipbook-vue/style";
 html,
 body {
 	margin: 0;

@@ -51,15 +51,15 @@ importers:
 
   examples/demo:
     dependencies:
+      '@evomark/flipbook-vue':
+        specifier: link:../..
+        version: link:../..
       '@mdi/js':
         specifier: ^7.4.47
         version: 7.4.47
       core-js:
         specifier: ^3.8.3
         version: 3.46.0
-      flipbook-vue:
-        specifier: link:../..
-        version: link:../..
       vue:
         specifier: ^3.5.0
         version: 3.5.22(typescript@5.9.3)
