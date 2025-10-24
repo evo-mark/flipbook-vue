@@ -1,0 +1,36 @@
+{
+    "compilerOptions": {
+    /* === Core Options === */
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+
+    /* === Vue + JSX Support === */
+    "jsx": "preserve",
+    "allowJs": false,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+
+    /* === Strictness === */
+    "strict": true,
+    "noImplicitAny": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* === Path + Imports === */
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+
+    /* === Output + Declarations === */
+    "outDir": "dist",
+    "skipLibCheck": true,
+
+    /* === Vue compatibility === */
+    "types": ["vite/client"]
+  },
+  "include": ["src/**/*.ts", "src/**/*.vue", "src/shims.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}
