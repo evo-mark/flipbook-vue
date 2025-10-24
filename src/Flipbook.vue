@@ -53,7 +53,7 @@
 							left: xMargin + 'px',
 							top: yMargin + 'px',
 						}"
-						:src="pageUrlLoading(leftPage, true)"
+						:src="pageUrlLoading(leftPage, true) || ''"
 						@load="didLoadImage($event)"
 					/>
 					<img
@@ -65,7 +65,7 @@
 							left: viewWidth / 2 + 'px',
 							top: yMargin + 'px',
 						}"
-						:src="pageUrlLoading(rightPage, true)"
+						:src="pageUrlLoading(rightPage, true) || ''"
 						@load="didLoadImage($event)"
 					/>
 
@@ -528,8 +528,8 @@ function makePolygonArray(face: "front" | "back"): Array<any> {
 		dRotate = -dRotate;
 	}
 
-	minX.value = Infinity;
-	maxX.value = -Infinity;
+	let _minX = Infinity;
+	let _maxX = -Infinity;
 
 	const polygons: Array<any> = [];
 
@@ -548,8 +548,8 @@ function makePolygonArray(face: "front" | "back"): Array<any> {
 
 		const x0 = m.transformX(0);
 		const x1 = m.transformX(polygonWidth);
-		maxX.value = Math.max(Math.max(x0, x1), maxX.value);
-		minX.value = Math.min(Math.min(x0, x1), minX.value);
+		_maxX = Math.max(Math.max(x0, x1), _maxX);
+		_minX = Math.min(Math.min(x0, x1), _minX);
 
 		const lighting = computeLighting(pageRotation - rotate, dRotate);
 
@@ -558,6 +558,9 @@ function makePolygonArray(face: "front" | "back"): Array<any> {
 
 		polygons.push([`${face}${i}`, image, lighting, bgPos, m.toString(), Math.abs(Math.round(z))]);
 	}
+
+	minX.value = _minX;
+	maxX.value = _maxX;
 
 	return polygons;
 }

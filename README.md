@@ -1,70 +1,72 @@
-# flipbook-vue
+<p align="center">
+    <a href="https://evomark.co.uk" target="_blank" alt="Link to evoMark's website">
+        <picture>
+          <source media="(prefers-color-scheme: dark)" srcset="https://evomark.co.uk/wp-content/uploads/static/evomark-logo--dark.svg">
+          <source media="(prefers-color-scheme: light)" srcset="https://evomark.co.uk/wp-content/uploads/static/evomark-logo--light.svg">
+          <img alt="evoMark company logo" src="https://evomark.co.uk/wp-content/uploads/static/evomark-logo--light.svg" width="500">
+        </picture>
+    </a>
+</p>
 
-[![npm version](https://badge.fury.io/js/flipbook-vue.svg)](https://badge.fury.io/js/flipbook-vue)
-![demo](https://github.com/ts1/flipbook-vue/workflows/demo/badge.svg)
+<p align="center">
+  <img src="https://img.shields.io/npm/dm/@evomark/flipbook-vue.svg" alt="Downloads"></a>
+  <a href="https://www.npmjs.com/package/@evomark/flipbook-vue"><img src="https://img.shields.io/npm/v/@evomark/flipbook-vue.svg" alt="Version"></a>
+  <a href="https://github.com/evo-mark/flipbook-vue/blob/main/LICENCE"><img src="https://img.shields.io/github/license/evo-mark/flipbook-vue?style=flat" alt="Licence"></a>
+</p>
+
+# Flipbook Vue
 
 `flipbook-vue` is a Vue component that displays images in 3D page flip effect.
 
 Demo page is [here](https://ts1.github.io/flipbook-vue/).
 
+## Fork
+
+Due to some bugs with this package and modern versions of Vue 3, we decided to fork this project. We have also:
+
+-   Converted from Coffeescript to Typescript
+-   Converted Options API to Composition API
+-   Dropped support for Vue2
+-   Added Vite bundler
+-   Added ESLint and Prettier
+-   Cleaned up various bits of code
+
 ## Installation
 
-Install as a module:
-
-```
-npm i -S flipbook-vue
+```sh
+pnpm add @evomark/flipbook-vue
 ```
 
 or
 
-```
-yarn add flipbook-vue
+```sh
+yarn add @evomark/flipbook-vue
 ```
 
 or
 
+```sh
+npm i @evomark/flipbook-vue
 ```
-pnpm add flipbook-vue
-```
-
-Or include in html:
-
-```html
-<script src="https://unpkg.com/flipbook-vue"></script>
-```
-
-> **BREAKING CHANGE**: This form now provides Vue 3 version.
-> If you are using Vue 2.x, use `"https://unpkg.com/flipbook-vue/dist/vue2/flipbook.min.js"` (preferred) or `"https://unpkg.com/flipbook-vue@0"`.
 
 ## Usage
 
 ```html
 <template>
-  <flipbook class="flipbook" :pages="['array', 'of', 'image', 'URLs']"></flipbook>
+	<Flipbook class="flipbook" :pages="['array', 'of', 'image', 'URLs']"></Flipbook>
 </template>
 
-<style>
-.flipbook {
-  width: 90vw;
-  height: 90vh;
-}
-</style>
-```
-
-If installed as a module, with Vue 3.x,
-
-```html
-<script>
-import Flipbook from 'flipbook-vue'
-export default {
-  components: { Flipbook }
-}
+<script setup>
+	import Flipbook from "@evomark/flipbook-vue";
 </script>
-```
 
-To use with Vue 2.x,
-```js
-import Flipbook from 'flipbook-vue/vue2'
+<style>
+	@import "@evomark/flipbook-vue/style";
+	.flipbook {
+		width: 90vw;
+		height: 90vh;
+	}
+</style>
 ```
 
 ## Props
@@ -197,8 +199,8 @@ Example usage:
 
 ```html
 <flipbook :pages="pages" v-slot="flipbook">
-  <button @click="flipbook.flipLeft">Previous Page</button>
-  <button @click="flipbook.flipRight">Next Page</button>
+	<button @click="flipbook.flipLeft">Previous Page</button>
+	<button @click="flipbook.flipRight">Next Page</button>
 </flipbook>
 ```
 
@@ -268,32 +270,20 @@ Suitable to give `box-shadow`.
 
 ## Browser support
 
-Supports modern browsers and IE 11.
+Supports modern browsers.
 
 ## Development
 
 To start development server with demo pages:
 
 ```
-cd examples/demo
-pnpm i
-pnpm serve
-```
-
-To package for npm:
-
-```
-pnpm dist
+pnpm i -r
+pnpm run demo
 ```
 
 ## Credits
 
-- vivekKodira: README correction
-- siderisng: `dragToFlip`
-- MaikoTan: TypeScript support
-
-## License
-
-MIT
-
-Copyright © 2019-2023 Takeshi Sone.
+-   evoMark: Current maintainer
+-   vivekKodira: README correction
+-   siderisng: `dragToFlip`
+-   MaikoTan: TypeScript support

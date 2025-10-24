@@ -5,6 +5,9 @@ import js from "@eslint/js";
 import { defineConfigWithVueTs, vueTsConfigs } from "@vue/eslint-config-typescript";
 
 export default defineConfigWithVueTs(
+	{
+		ignores: ["dist/**", "node_modules/**"],
+	},
 	js.configs.recommended,
 	vueTsConfigs.recommended,
 	...pluginVue.configs["flat/recommended"],
@@ -19,6 +22,7 @@ export default defineConfigWithVueTs(
 		rules: {
 			"vue/multi-word-component-names": "off",
 			"vue/valid-v-slot": "off",
+			"vue/block-lang": "off",
 			"@typescript-eslint/no-explicit-any": "off",
 		},
 	}

@@ -1,2 +1,5 @@
 onlyBuiltDependencies:
-  - esbuild
+    - esbuild
+
+packages:
+    - examples/demo

@@ -1,12 +1,23 @@
 {
-	"name": "flipbook-vue",
-	"version": "1.0.0-beta.4",
+	"name": "@evomark/flipbook-vue",
+	"version": "1.0.0",
+	"type": "module",
 	"license": "MIT",
 	"description": "3D page flip effect for Vue.js",
-	"homepage": "https://ts1.github.io/flipbook-vue/",
-	"author": "Takeshi Sone <takeshi.sone@gmail.com> (https://github.com/ts1)",
-	"repository": "github:ts1/flipbook-vue",
-	"type": "module",
+	"homepage": "https://evomark.co.uk",
+	"contributors": [
+		{
+			"name": "Craig Riley",
+			"email": "c.riley@evomark.co.uk",
+			"url": "https://evomark.co.uk"
+		},
+		{
+			"name": "Takeshi Sone",
+			"email": "takeshi.sone@gmail.com",
+			"url": "https://github.com/ts1"
+		}
+	],
+	"repository": "github:evo-mark/flipbook-vue",
 	"keywords": [
 		"vue",
 		"flipbook",
@@ -15,23 +26,22 @@
 		"page",
 		"flip",
 		"turn",
-		"3d",
-		"coffeescript",
-		"coffeescript2"
+		"3d"
 	],
-	"module": "dist/flipbook.js",
-	"main": "dist/flipbook.cjs.js",
-	"types": "types/flipbook.d.ts",
-	"unpkg": "dist/flipbook.min.js",
+	"module": "dist/flipbook-vue.js",
+	"main": "dist/flipbook-vue.js",
+	"types": "dist/index.d.ts",
 	"exports": {
 		".": {
-			"import": "./dist/flipbook.mjs",
-			"types": "./types/flipbook.d.ts"
-		}
+			"types": "./dist/index.d.ts",
+			"import": "./dist/flipbook.mjs"
+		},
+		"./style": "./dist/flipbook-vue.css"
 	},
 	"scripts": {
 		"build": "vite build",
-		"dist": "rollup -c rollup.config.js"
+		"demo": "pnpm --filter=demo run dev",
+		"prepublishOnly": "npm run build"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.38.0",
@@ -43,7 +53,8 @@
 		"eslint-plugin-vue": "^10.5.1",
 		"globals": "^16.4.0",
 		"postcss": "^8.4.16",
-		"vite": "^7.1.12"
+		"vite": "^7.1.12",
+		"vite-plugin-dts": "^4.5.4"
 	},
 	"peerDependencies": {
 		"vue": ">=3.5.0"
