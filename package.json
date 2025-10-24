@@ -1,5 +1,9 @@
 {
 	"name": "@evomark/flipbook-vue",
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	},
 	"version": "1.0.0",
 	"type": "module",
 	"license": "MIT",
