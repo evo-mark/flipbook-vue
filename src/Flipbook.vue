@@ -53,6 +53,7 @@
 							left: xMargin + 'px',
 							top: yMargin + 'px',
 						}"
+						:alt="pageAlt(leftPage)"
 						:src="pageUrlLoading(leftPage, true) || ''"
 						@load="didLoadImage($event)"
 					/>
@@ -65,6 +66,7 @@
 							left: viewWidth / 2 + 'px',
 							top: yMargin + 'px',
 						}"
+						:alt="pageAlt(rightPage)"
 						:src="pageUrlLoading(rightPage, true) || ''"
 						@load="didLoadImage($event)"
 					/>
@@ -110,7 +112,9 @@
 <script setup lang="ts">
 import Matrix from "./matrix";
 import spinner from "./spinner.svg";
-import { ref, computed, onMounted, onBeforeUnmount, watch, useTemplateRef } from "vue";
+import { ref, computed, onMounted, onBeforeUnmount, watch, useTemplateRef, PropType } from "vue";
+
+type ImageItem = { src: string; alt: string; hiResSrc: string };
 
 const easeIn = (x) => Math.pow(x, 2);
 const easeOut = (x) => 1 - easeIn(1 - x);
@@ -124,9 +128,19 @@ const emit = defineEmits([
 	"flip-right-start",
 	"flip-right-end",
 ]);
+const startPage = defineModel("startPage", {
+	type: Number,
+	default: null,
+});
 const props = defineProps({
-	pages: { type: Array as () => string[], required: true },
-	pagesHiRes: { type: Array as () => string[], default: () => [] },
+	pages: {
+		type: Array as PropType<string[] | ImageItem[]>,
+		required: true,
+	},
+	pagesHiRes: {
+		type: Array as PropType<string[]>,
+		default: () => [],
+	},
 	flipDuration: { type: Number, default: 1000 },
 	zoomDuration: { type: Number, default: 500 },
 	zooms: { type: Array as () => number[], default: () => [1, 2, 4] },
@@ -142,7 +156,6 @@ const props = defineProps({
 		validator: (val: string) => val === "left" || val === "right",
 	},
 	centering: { type: Boolean, default: true },
-	startPage: { type: Number, default: null },
 	loadingImage: { type: String, default: spinner },
 	clickToZoom: { type: Boolean, default: true },
 	dragToFlip: { type: Boolean, default: true },
@@ -392,7 +405,7 @@ onMounted(() => {
 	window.addEventListener("resize", onResize, { passive: true });
 	onResize();
 	zoom.value = zooms_.value[0];
-	goToPage(props.startPage);
+	goToPage(startPage.value);
 });
 
 onBeforeUnmount(() => {
@@ -418,12 +431,19 @@ function fixFirstPage(): void {
 	}
 }
 
+function pageAlt(page: number): string | undefined {
+	const _page = props.pages[page] || null;
+	if (!_page || typeof _page !== "object" || !_page.alt) return;
+	else return _page.alt;
+}
+
 function pageUrl(page: number, hiRes = false): string | null {
+	const _page = props.pages[page] || null;
 	if (hiRes && zoom.value > 1 && !zooming.value) {
-		const url = props.pagesHiRes[page];
+		const url = _page && typeof _page === "object" ? _page.hiResSrc : props.pagesHiRes[page];
 		if (url) return url;
 	}
-	return props.pages[page] || null;
+	return _page && typeof _page === "object" ? _page.src : _page;
 }
 
 function pageUrlLoading(page: number, hiRes = false): string | null {
@@ -1025,17 +1045,14 @@ watch(
 	(after: any[], before: any[]) => {
 		fixFirstPage();
 		if (!(before && before.length) && after && after.length) {
-			if (props.startPage > 1 && after[0] == null) currentPage.value++;
+			if (startPage.value > 1 && after[0] == null) currentPage.value++;
 		}
 	}
 );
 
-watch(
-	() => props.startPage,
-	(p: number) => {
-		goToPage(p);
-	}
-);
+watch(startPage, (p: number) => {
+	goToPage(p);
+});
 </script>
 
 <style scoped>

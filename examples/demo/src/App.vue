@@ -51,9 +51,9 @@
 </template>
 
 <script setup>
+import { mdiChevronLeftCircle, mdiChevronRightCircle, mdiPlusCircle, mdiMinusCircle } from "@mdi/js";
 import SvgIcon from "vue3-icon";
 import { ref, onMounted } from "vue";
-import { mdiChevronLeftCircle, mdiChevronRightCircle, mdiPlusCircle, mdiMinusCircle } from "@mdi/js";
 import Flipbook from "@evomark/flipbook-vue";
 import Ribbon from "./Ribbon.vue";
 
